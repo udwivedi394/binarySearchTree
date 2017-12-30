@@ -1,0 +1,162 @@
+class Node:
+	def __init__(self,data):
+		self.data = data
+		self.left = None
+		self.right = None
+
+class BST:
+	def __init__(self):
+		self.root = None
+
+	def addNode(self,data):
+		if self.root == None:
+			self.root = Node(data)
+			return
+		
+		temp = self.root
+		while temp:
+			prevNode = temp
+			if data < temp.data:
+				temp = temp.left
+			elif data >= temp.data:
+				temp = temp.right
+
+		if data < prevNode.data:
+			prevNode.left = Node(data)
+		else:
+			prevNode.right = Node(data)
+		return
+
+	def inOrder(self):
+		if self.root == None:
+			print "Nothing to print"
+			return
+		print "\nIn Order:",
+		stack = []
+		temp = self.root
+
+		while 1:
+			while temp:
+				stack.append(temp)
+				temp = temp.left
+
+			while temp == None and len(stack):
+				temp = stack.pop()
+				print temp.data,
+				temp = temp.right
+
+			if temp == None and len(stack)==0:
+				break
+		return
+
+	def levelOrder(self):
+		if self.root == None:
+			print "No Tree"
+			return
+		print "\nLevel Order:"
+		queue = []
+		temp = self.root
+		queue.append(temp)
+		
+		while len(queue):
+			n = len(queue)
+			while n:
+				temp = queue.pop(0)
+				
+				if temp.left:
+					queue.append(temp.left)
+				if temp.right:
+					queue.append(temp.right)
+				print temp.data,
+				n -= 1
+			print
+		return
+
+	#Returns the previous Node if del_operation is True
+	def searchData(self,data,del_operation):
+		temp = self.root
+		prevNode = None
+		print
+		while temp:
+			if temp.data == data:
+				print "%d found!"%(data)
+				if del_operation:
+					return prevNode
+				return True
+			prevNode = temp
+			if data < temp.data:
+				temp = temp.left
+			else:
+				temp = temp.right
+		print "%d not present"%(data)
+		if del_operation:
+			return None
+		return False
+	
+	#Complicated operation
+	def deleteNode(self,data):
+		prevNode = self.searchData(data,True)
+		if prevNode == None and self.root.data != data:
+			print "Node to be deleted not found!"
+			return False
+		left = True
+		if prevNode == None:
+			node = self.root
+		elif data < prevNode.data:
+			node = prevNode.left
+		elif data > prevNode.data:
+			node = prevNode.right
+			left = False
+
+		#If No children or only 1 child and we are not deleting root
+		if prevNode and ((node.left == None) ^ (node.right == None) or node.left == None):
+			print "I'm coming here"
+			if left:
+				prevNode.left = node.left
+			else:
+				prevNode.right = node.right
+			return
+		
+		#To handle root case, and node with 2 children
+
+		if prevNode==None:
+			if node.left == None and node.right == None:
+				self.root = None
+			elif node.left == None:
+				self.root = node.right
+			elif node.right == None:
+				self.root = node.left
+			return
+
+		temp = node.right
+		prevNode = node
+
+		while temp and temp.left:
+			prevNode = temp
+			temp = temp.left
+
+		node.data ^= temp.data
+		temp.data ^= node.data
+		node.data ^= temp.data
+
+		prevNode.left = None
+		return None
+
+binST = BST()
+binST.addNode(8)
+binST.addNode(3)
+binST.addNode(1)
+binST.addNode(6)
+binST.addNode(4)
+binST.addNode(7)
+binST.addNode(15)
+binST.addNode(10)
+binST.addNode(9)
+binST.addNode(17)
+binST.addNode(16)
+
+binST.inOrder()
+binST.levelOrder()
+binST.deleteNode(15)
+binST.inOrder()
+binST.levelOrder()
