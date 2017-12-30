@@ -16,7 +16,7 @@ def merge2BST02(root1, root2):
 	data1 = None
 	data2 = None
 
-	exhaust1 = exhaust2 = True
+	exhaust1 = exhaust2 = False
 	while 1:
 		#Retrive the next inOrder element of BST1 
 		while inOrder1:
@@ -47,19 +47,19 @@ def merge2BST02(root1, root2):
 			if data1 != INF:
 				print data1,
 			inOrder1 = True
-			#If 1st is exhausted then set the data element to INF and set exhaust to False
+			#If 1st is exhausted then set the data element to INF and set exhaust to True
 			if temp1==None and len(stack1)==0:
 				data1 = INF
-				exhaust1 = False
+				exhaust1 = True
 		if data1 >= data2:
 			if data2 != INF:
 				print data2,
 			inOrder2 = True
-			#If 2nd is exhausted then set the data element to INF and set exhaust to False
+			#If 2nd is exhausted then set the data element to INF and set exhaust to True
 			if temp2==None and len(stack2)==0:
 				data2 = INF
-				exhaust2 = False
+				exhaust2 = True
 
-		if exhaust1 == False and exhaust2 == False:
+		if exhaust1 and exhaust2:
 			break
 	return		
