@@ -1,5 +1,6 @@
 import binarySearchTree as binClass
 import searchPairwithSum as sPair
+import merge2BST as mrgBST
 
 #Main driver program
 binST = binClass.BST()
@@ -25,3 +26,23 @@ binST.levelOrder()
 sPair.findSumPair03(binST.getRoot(),33)
 print
 #sPair.findSumPair02(binST.getRoot(),33)
+
+bst1 = binClass.BST()
+for i in range(19,10,-2):
+	bst1.addNode(i)
+print "First BST:",bst1.inOrder()
+"""
+bst1.addNode(3)
+bst1.addNode(1)
+bst1.addNode(5)
+"""
+bst2 = binClass.BST()
+for i in range(10,20,2):
+	bst2.addNode(i)
+print "Second BST:",bst2.inOrder()
+"""
+bst2.addNode(4)
+bst2.addNode(2)
+bst2.addNode(6)
+"""
+mrgBST.merge2BST(bst1.getRoot(),bst2.getRoot())
