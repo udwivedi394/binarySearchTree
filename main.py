@@ -46,4 +46,7 @@ print "Second BST:",bst2.inOrder()
 bst2.addNode(4)
 bst2.addNode(2)
 bst2.addNode(6)
-mrgBST.merge2BST02(bst1.getRoot(),bst2.getRoot())
+mrgBST.merge2BST(bst1.getRoot(),bst2.getRoot())
+
+print "\nNew Search:"
+binST.searchKthNode(0)

@@ -146,6 +146,29 @@ class BST:
 		#Set free the left Most leaf node
 		prevNode.left = None
 		return None
+	
+	#Function to search kth Node in the BST
+	def searchKthNode(self,k):
+		stack = []
+		temp = self.root
+
+		while 1:
+			while temp:
+				stack.append(temp)
+				temp = temp.left
+
+			while temp==None and len(stack):
+				temp = stack.pop()
+				k -= 1
+
+				if k <= 0:
+					print temp.data,
+					return
+				temp = temp.right
+
+			if temp==None and len(stack)==0:
+				break
+		return
 
 	def getRoot(self):
 		return self.root

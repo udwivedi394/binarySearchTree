@@ -3,7 +3,7 @@ import time
 #Prints the 2 BST in sorted order
 #Time Complexity: O(m+n)
 #Space Complexity: O(log m + log n)
-def merge2BST02(root1, root2):
+def merge2BST(root1, root2):
 	stack1 = []
 	stack2 = []
 	
