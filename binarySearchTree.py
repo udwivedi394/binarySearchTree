@@ -73,6 +73,7 @@ class BST:
 		return
 
 	#Returns the previous Node if del_operation is True
+	#Return None if data is on Root node or the data not found
 	def searchData(self,data,del_operation):
 		temp = self.root
 		prevNode = None
@@ -118,7 +119,6 @@ class BST:
 			return
 		
 		#To handle root case, and node with 2 children
-
 		if prevNode==None:
 			if node.left == None and node.right == None:
 				self.root = None
@@ -131,32 +131,18 @@ class BST:
 		temp = node.right
 		prevNode = node
 
+		#Find the minimum in right Subtree of node to be deleted
+		#As the right subtree is also BST, the minimum node of entire subtree will be the left most leaf
 		while temp and temp.left:
+			#Keep track of previous node of leaf node
 			prevNode = temp
 			temp = temp.left
 
+		#Swap the data with the node to be deleted
 		node.data ^= temp.data
 		temp.data ^= node.data
 		node.data ^= temp.data
 
+		#Set free the left Most leaf node
 		prevNode.left = None
 		return None
-
-binST = BST()
-binST.addNode(8)
-binST.addNode(3)
-binST.addNode(1)
-binST.addNode(6)
-binST.addNode(4)
-binST.addNode(7)
-binST.addNode(15)
-binST.addNode(10)
-binST.addNode(9)
-binST.addNode(17)
-binST.addNode(16)
-
-binST.inOrder()
-binST.levelOrder()
-binST.deleteNode(15)
-binST.inOrder()
-binST.levelOrder()
