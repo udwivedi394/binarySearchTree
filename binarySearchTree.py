@@ -146,3 +146,6 @@ class BST:
 		#Set free the left Most leaf node
 		prevNode.left = None
 		return None
+
+	def getRoot(self):
+		return self.root
