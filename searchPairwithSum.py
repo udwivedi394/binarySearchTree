@@ -59,3 +59,58 @@ def findSumPair02(root,k):
 			tail = tail.left
 	print "\nNot found!"
 	return False
+
+#Time Complexity: O(n)
+#Space Complexity: O(Log n), max size to be stored is the node in height of tree
+def findSumPair03(root,k):
+	#Reverse inOrder traversal of BST
+	revStack = []
+	fwdStack = []
+	revtemp = root
+	fwdtemp = root
+	curLow = None
+	curHigh = None
+	inOrderNext = True
+	revInOrderNext = True
+
+	while 1:
+		#Next element in InOrder traversal
+		while inOrderNext:
+			while fwdtemp:
+				fwdStack.append(fwdtemp)
+				fwdtemp = fwdtemp.left
+			if len(fwdStack):
+				fwdtemp = fwdStack.pop()
+				curLow = fwdtemp.data
+				fwdtemp = fwdtemp.right
+			inOrderNext = False
+		#Next element in Reverse InOrder traversal
+		while revInOrderNext:	
+			while revtemp:
+				revStack.append(revtemp)
+				revtemp = revtemp.right
+			if len(revStack):
+				revtemp = revStack.pop()
+				curHigh = revtemp.data
+				revtemp = revtemp.left
+			revInOrderNext = False
+
+		#If low+high = k, then return found
+		if curLow+curHigh == k:
+			print "\nFound:",(curLow,curHigh)
+			return True
+		#if current sum is less than sum required find next in InOrder Traversal
+		elif curLow+curHigh < k:
+			inOrderNext = True
+		#if current sum is greater than sum required find next in revInOrder Traversal
+		else:
+			revInOrderNext = True
+	
+		#If any of the traversal is complete then terminate the loop
+		if revtemp == None and len(revStack) == 0:
+			break
+
+		if fwdtemp == None and len(fwdStack) == 0:
+			break
+	print "Not found!"
+	return False
