@@ -1,4 +1,5 @@
 import binarySearchTree as binClass
+import searchPairwithSum as sPair
 
 #Main driver program
 binST = binClass.BST()
@@ -19,3 +20,6 @@ binST.levelOrder()
 binST.deleteNode(15)
 binST.inOrder()
 binST.levelOrder()
+
+sPair.findSumPair01(binST.getRoot(),33)
+sPair.findSumPair02(binST.getRoot(),33)
