@@ -17,9 +17,11 @@ binST.addNode(16)
 
 binST.inOrder()
 binST.levelOrder()
-binST.deleteNode(15)
+#binST.deleteNode(15)
 binST.inOrder()
 binST.levelOrder()
 
-sPair.findSumPair01(binST.getRoot(),33)
-sPair.findSumPair02(binST.getRoot(),33)
+#sPair.findSumPair01(binST.getRoot(),33)
+sPair.findSumPair03(binST.getRoot(),33)
+print
+#sPair.findSumPair02(binST.getRoot(),33)
