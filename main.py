@@ -1,6 +1,7 @@
 import binarySearchTree as binClass
 import searchPairwithSum as sPair
 import merge2BST as mrgBST
+import inOrderSuccessor as inOrdSuc
 
 #Main driver program
 binST = binClass.BST()
@@ -50,3 +51,5 @@ mrgBST.merge2BST(bst1.getRoot(),bst2.getRoot())
 
 print "\nNew Search:"
 binST.searchKthNode(0)
+
+print "\nSuccessor:",binST.inOrderSuccessor(17)

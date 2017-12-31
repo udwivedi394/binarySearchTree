@@ -170,5 +170,38 @@ class BST:
 				break
 		return
 
+	#Returns the inOrder Successor of given node k
+	def inOrderSuccessor(self,k):
+		temp = self.root
+		successor = None
+		found = False
+		while temp:
+			if k == temp.data:
+				found = True
+				break
+			#If going in left then current node will be successor
+			elif k < temp.data:
+				successor = temp
+				temp = temp.left
+			else:
+				temp = temp.right
+		if found == False:
+			print "Element not found"
+			return False
+		if successor == None:
+			print "Last Node, no successor present!"
+			return False
+
+		#If for the found node, right subtree exists
+		if temp.right:
+			#Return the minimum value in the right subtree
+			#Which will be the left most node of the subtree
+			temp = temp.right
+			while temp.left:
+				temp = temp.left
+			return temp.data
+		#If no subtree exists then return the successor data
+		return successor.data
+	
 	def getRoot(self):
 		return self.root
